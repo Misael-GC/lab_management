@@ -2,7 +2,10 @@
 
 use App\Controllers\PostController;
 use App\Controllers\HomeController;
-use App\Controllers\ClientController; 
+use App\Controllers\ClientController;
+use App\Controllers\ProjectController;
+use App\Controllers\SampleController;
+use App\Controllers\UserController;
 
 
 /**
@@ -18,6 +21,9 @@ $router->get('/blog',       PostController::class, 'index');
 $router->get('/blog/show',  PostController::class, 'show');
 
 $router->get('/clients', ClientController::class, 'index');
+$router->get('/projects', ProjectController::class, 'index');
+$router->get('/samples', SampleController::class, 'index');
+$router->get('/users', UserController::class, 'index');
 
 
 

@@ -37,14 +37,14 @@
             <i class="bi bi-grid-1x2-fill"></i> Dashboard
         </a>
 
-        <a href="/blog" class="d-flex align-items-center gap-2 px-3 py-2 rounded-2 text-decoration-none mb-1
-            <?= str_starts_with($_SERVER['REQUEST_URI'], '/blog') ? 'text-white bg-primary' : 'text-secondary' ?>"
+        <a href="/samples" class="d-flex align-items-center gap-2 px-3 py-2 rounded-2 text-decoration-none mb-1
+            <?= str_starts_with($_SERVER['REQUEST_URI'], '/samples') ? 'text-white bg-primary' : 'text-secondary' ?>"
             style="font-size:.875rem">
             <i class="bi bi-bookmark-fill"></i> Samples
         </a>
 
-        <a href="/blog" class="d-flex align-items-center gap-2 px-3 py-2 rounded-2 text-decoration-none mb-1
-            <?= str_starts_with($_SERVER['REQUEST_URI'], '/clients') ? 'text-white bg-primary' : 'text-secondary' ?>"
+        <a href="/projects" class="d-flex align-items-center gap-2 px-3 py-2 rounded-2 text-decoration-none mb-1
+            <?= str_starts_with($_SERVER['REQUEST_URI'], '/projects') ? 'text-white bg-primary' : 'text-secondary' ?>"
             style="font-size:.875rem">
             <i class="bi bi-folder-fill"></i> Projects
         </a>
@@ -57,8 +57,8 @@
 
         <div class="text-uppercase text-secondary px-2 pt-3 pb-1" style="font-size:.65rem;letter-spacing:.1em">Sistema</div>
 
-        <a href="/settings" class="d-flex align-items-center gap-2 px-3 py-2 rounded-2 text-decoration-none mb-1
-            <?= $_SERVER['REQUEST_URI'] === '/settings' ? 'text-white bg-primary' : 'text-secondary' ?>"
+        <a href="/users" class="d-flex align-items-center gap-2 px-3 py-2 rounded-2 text-decoration-none mb-1
+            <?= $_SERVER['REQUEST_URI'] === '/users' ? 'text-white bg-primary' : 'text-secondary' ?>"
             style="font-size:.875rem">
             <i class="bi bi-gear"></i> Settings
         </a>
