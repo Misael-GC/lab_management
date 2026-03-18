@@ -13,7 +13,7 @@ class Database
         if (self::$instance === null) {
             $dsn = sprintf(
                 'mysql:host=%s;dbname=%s;charset=utf8mb4',
-                $_ENV['DB_HOST'],   // ✅ corchetes, no paréntesis
+                $_ENV['DB_HOST'],
                 $_ENV['DB_NAME']
             );
 
