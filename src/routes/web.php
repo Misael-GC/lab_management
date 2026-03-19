@@ -29,5 +29,10 @@ $router->post('/projects/store', ProjectController::class, 'store');
 $router->get('/samples', SampleController::class, 'index');
 $router->get('/samples/create', SampleController::class, 'create');
 $router->post('/samples/store', SampleController::class, 'store');
+$router->get('/samples/show', SampleController::class, 'show');
+$router->get('/samples/edit', SampleController::class, 'edit');
+$router->post('/samples/update', SampleController::class, 'update');
+$router->get('/samples/delete', SampleController::class, 'delete');
+
 
 $router->get('/users', UserController::class, 'index');

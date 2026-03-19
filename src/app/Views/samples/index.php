@@ -68,15 +68,18 @@
                         <td class="small text-secondary"><?= $s['received_date'] ?></td>
                         <td><span class="badge <?= $s['status_class'] ?>"><?= $s['sample_status'] ?></span></td>
                         <td class="text-end pe-4">
-                            <button class="btn btn-sm btn-outline-secondary border-0 px-1" title="Ver">
+                            <a href="/samples/show?id=<?= $s['sample_id'] ?>" class="btn btn-sm btn-outline-secondary border-0 px-1" title="Ver">
                                 <i class="bi bi-eye text-secondary"></i>
-                            </button>
-                            <button class="btn btn-sm btn-outline-secondary border-0 px-1" title="Editar">
+                            </a>
+                            <a href="/samples/edit?id=<?= $s['sample_id'] ?>" class="btn btn-sm btn-outline-secondary border-0 px-1" title="Editar">
                                 <i class="bi bi-pencil text-warning"></i>
-                            </button>
-                            <button class="btn btn-sm btn-outline-secondary border-0 px-1" title="Eliminar">
+                            </a>
+                            <a href="/samples/delete?id=<?= $s['sample_id'] ?>"
+                                class="btn btn-sm btn-outline-secondary border-0 px-1"
+                                title="Eliminar"
+                                onclick="return confirm('¿Estás seguro de eliminar esta muestra?')">
                                 <i class="bi bi-trash text-danger"></i>
-                            </button>
+                            </a>
                         </td>
                     </tr>
                 <?php endforeach ?>

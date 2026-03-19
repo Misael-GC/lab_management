@@ -93,4 +93,75 @@ class SampleController extends BaseController
         }
     }
 
+    public function show(): void
+    {
+        $id = $_GET['id'] ?? null;
+        $db = Database::getInstance();
+        $stmt = $db->prepare("
+            SELECT s.*, p.name as project_name, c.name as client_name, u.name as user_name
+            FROM sample s
+            JOIN project p ON s.id_project = p.id
+            JOIN client c ON p.id_client = c.id
+            JOIN user u ON s.id_user = u.id
+            WHERE s.id = ?
+        ");
+        $stmt->execute([$id]);
+        $sample = $stmt->fetch();
+
+        if (!$sample) { header('Location: /samples'); exit; }
+
+        $sample['status_class'] = $this->getStatusBadgeClass($sample['status']);
+
+        $this->render('samples/show', [
+            'title' => 'Sample Details',
+            'sample' => $sample
+        ]);
+    }
+
+    public function edit(): void
+    {
+        $id = $_GET['id'] ?? null;
+        $db = Database::getInstance();
+        
+        $sample = $db->prepare("SELECT * FROM sample WHERE id = ?");
+        $sample->execute([$id]);
+        $sampleData = $sample->fetch();
+
+        $projects = $db->query("SELECT p.id, p.name as project_name, c.name as client_name FROM project p JOIN client c ON p.id_client = c.id")->fetchAll();
+
+        $this->render('samples/edit', [
+            'title' => 'Edit Sample',
+            'sample' => $sampleData,
+            'projects' => $projects
+        ]);
+    }
+
+    public function update(): void
+    {
+        $db = Database::getInstance();
+        $id = $_POST['id'];
+        $code = $_POST['code'];
+        $status = $_POST['status'];
+        $id_project = $_POST['id_project'];
+
+        $stmt = $db->prepare("UPDATE sample SET code = ?, status = ?, id_project = ? WHERE id = ?");
+        if ($stmt->execute([$code, $status, $id_project, $id])) {
+            header('Location: /samples');
+        }
+    }
+
+    public function delete(): void
+    {
+        $id = $_GET['id'] ?? null;
+        $db = Database::getInstance();
+        
+        // Primero eliminamos actividad relacionada para evitar error de FK si no está en CASCADE
+        $db->prepare("DELETE FROM his_activity WHERE id_sample = ?")->execute([$id]);
+        
+        $stmt = $db->prepare("DELETE FROM sample WHERE id = ?");
+        $stmt->execute([$id]);
+        
+        header('Location: /samples');
+    }
+
 }
