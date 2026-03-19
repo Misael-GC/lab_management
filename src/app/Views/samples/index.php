@@ -46,7 +46,7 @@
 <!-- Table -->
 <div class="card border-0 shadow-sm">
     <div class="card-body p-0">
-        <table class="table table-hover mb-0">
+        <table class="table table-hover mb-0" id="datatablesSimple">
             <thead class="table-light">
                 <tr>
                     <th class="ps-4">ID</th>
