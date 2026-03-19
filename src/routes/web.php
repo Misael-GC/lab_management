@@ -27,4 +27,7 @@ $router->post('/projects/store', ProjectController::class, 'store');
 
 
 $router->get('/samples', SampleController::class, 'index');
+$router->get('/samples/create', SampleController::class, 'create');
+$router->post('/samples/store', SampleController::class, 'store');
+
 $router->get('/users', UserController::class, 'index');

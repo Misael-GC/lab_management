@@ -4,9 +4,9 @@
         <h4 class="fw-bold mb-0">Sample Management</h4>
         <p class="text-secondary small mb-0">Manage and track laboratory samples</p>
     </div>
-    <button class="btn btn-primary btn-sm px-3">
+    <a href="/samples/create" class="btn btn-primary btn-sm px-3">
         <i class="bi bi-plus-lg me-1"></i> New Sample
-    </button>
+    </a>
 </div>
 
 <!-- Filters -->
@@ -60,25 +60,25 @@
             </thead>
             <tbody>
                 <?php foreach ($samples as $s): ?>
-                <tr>
-                    <td class="ps-4 text-secondary small"><?= $s['sample_id'] ?></td>
-                    <td class="fw-medium small"><?= $s['sample_code'] ?></td>
-                    <td class="small"><?= $s['cliente_nombre'] ?></td>
-                    <td class="small"><?= $s['proyecto_nombre'] ?></td>
-                    <td class="small text-secondary"><?= $s['received_date'] ?></td>
-                    <td><span class="badge <?= $s['status_class'] ?>"><?= $s['sample_status'] ?></span></td>
-                    <td class="text-end pe-4">
-                        <button class="btn btn-sm btn-outline-secondary border-0 px-1" title="Ver">
-                            <i class="bi bi-eye text-secondary"></i>
-                        </button>
-                        <button class="btn btn-sm btn-outline-secondary border-0 px-1" title="Editar">
-                            <i class="bi bi-pencil text-warning"></i>
-                        </button>
-                        <button class="btn btn-sm btn-outline-secondary border-0 px-1" title="Eliminar">
-                            <i class="bi bi-trash text-danger"></i>
-                        </button>
-                    </td>
-                </tr>
+                    <tr>
+                        <td class="ps-4 text-secondary small"><?= $s['sample_id'] ?></td>
+                        <td class="fw-medium small"><?= $s['sample_code'] ?></td>
+                        <td class="small"><?= $s['cliente_nombre'] ?></td>
+                        <td class="small"><?= $s['proyecto_nombre'] ?></td>
+                        <td class="small text-secondary"><?= $s['received_date'] ?></td>
+                        <td><span class="badge <?= $s['status_class'] ?>"><?= $s['sample_status'] ?></span></td>
+                        <td class="text-end pe-4">
+                            <button class="btn btn-sm btn-outline-secondary border-0 px-1" title="Ver">
+                                <i class="bi bi-eye text-secondary"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-secondary border-0 px-1" title="Editar">
+                                <i class="bi bi-pencil text-warning"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-secondary border-0 px-1" title="Eliminar">
+                                <i class="bi bi-trash text-danger"></i>
+                            </button>
+                        </td>
+                    </tr>
                 <?php endforeach ?>
             </tbody>
         </table>

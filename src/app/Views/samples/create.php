@@ -1,0 +1,55 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h4 class="fw-bold mb-0">Register New Sample</h4>
+        <p class="text-secondary small mb-0">Assign a new specimen to a laboratory project</p>
+    </div>
+    <a href="/samples" class="btn btn-outline-secondary btn-sm px-3">
+        <i class="bi bi-arrow-left me-1"></i> Back
+    </a>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body p-4">
+                <form action="/samples/store" method="POST">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label small fw-medium">Sample Code</label>
+                            <input type="text" name="code" class="form-control form-control-sm" 
+                                   placeholder="e.g. SMP-2026-001" required 
+                                   value="SMP-<?= date('Y') ?>-<?= rand(100, 999) ?>">
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <label class="form-label small fw-medium">Initial Status</label>
+                            <select name="status" class="form-select form-select-sm">
+                                <option value="Pending">Pending</option>
+                                <option value="Urgent">Urgent</option>
+                                <option value="In Progress">In Progress</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label class="form-label small fw-medium">Assign to Project</label>
+                            <select name="id_project" class="form-select form-select-sm" required>
+                                <option value="" selected disabled>Select the project...</option>
+                                <?php foreach ($projects as $p): ?>
+                                    <option value="<?= $p['id'] ?>">
+                                        <?= $p['client_name'] ?> - <?= $p['project_name'] ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+
+                        <div class="col-md-12 mt-4 text-end">
+                            <button type="submit" class="btn btn-primary btn-sm px-4">
+                                <i class="bi bi-save me-1"></i> Register Specimen
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
