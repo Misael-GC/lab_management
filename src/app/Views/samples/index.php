@@ -59,21 +59,14 @@
                 </tr>
             </thead>
             <tbody>
-                <?php
-                $samples = [
-                    ['id'=>'#503','code'=>'SMP-2024-503','client'=>'BioTech Corp','project'=>'Vaccine Development','date'=>'2024-03-13','status'=>'Pending','badge'=>'warning'],
-                    ['id'=>'#502','code'=>'SMP-2024-502','client'=>'MedLab Inc',  'project'=>'Blood Screening',    'date'=>'2024-03-13','status'=>'In Progress','badge'=>'primary'],
-                    ['id'=>'#501','code'=>'SMP-2024-501','client'=>'PharmaCo',    'project'=>'Drug Efficacy',      'date'=>'2024-03-12','status'=>'Urgent','badge'=>'danger'],
-                ];
-                ?>
                 <?php foreach ($samples as $s): ?>
                 <tr>
-                    <td class="ps-4 text-secondary small"><?= $s['id'] ?></td>
-                    <td class="fw-medium small"><?= $s['code'] ?></td>
-                    <td class="small"><?= $s['client'] ?></td>
-                    <td class="small"><?= $s['project'] ?></td>
-                    <td class="small text-secondary"><?= $s['date'] ?></td>
-                    <td><span class="badge text-bg-<?= $s['badge'] ?>"><?= $s['status'] ?></span></td>
+                    <td class="ps-4 text-secondary small"><?= $s['sample_id'] ?></td>
+                    <td class="fw-medium small"><?= $s['sample_code'] ?></td>
+                    <td class="small"><?= $s['cliente_nombre'] ?></td>
+                    <td class="small"><?= $s['proyecto_nombre'] ?></td>
+                    <td class="small text-secondary"><?= $s['received_date'] ?></td>
+                    <td><span class="badge <?= $s['status_class'] ?>"><?= $s['sample_status'] ?></span></td>
                     <td class="text-end pe-4">
                         <button class="btn btn-sm btn-outline-secondary border-0 px-1" title="Ver">
                             <i class="bi bi-eye text-secondary"></i>
