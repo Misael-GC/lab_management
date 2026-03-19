@@ -10,11 +10,6 @@
 
 <div class="row g-3">
     <?php
-    $projects = [
-        ['name'=>'Vaccine Development', 'client'=>'BioTech Corp', 'date'=>'2024-01-15','samples'=>45,'status'=>'Active','color'=>'success'],
-        ['name'=>'Blood Screening',     'client'=>'MedLab Inc',   'date'=>'2024-02-01','samples'=>32,'status'=>'Active','color'=>'success'],
-        ['name'=>'Drug Efficacy',       'client'=>'PharmaCo',     'date'=>'2024-02-10','samples'=>28,'status'=>'Active','color'=>'success'],
-    ];
     ?>
     <?php foreach ($projects as $p): ?>
     <div class="col-md-4">
@@ -24,18 +19,18 @@
                     <div class="bg-primary bg-opacity-10 rounded-2 p-2">
                         <i class="bi bi-kanban text-primary fs-5"></i>
                     </div>
-                    <span class="badge text-bg-<?= $p['color'] ?>"><?= $p['status'] ?></span>
+                    <span class="badge text-bg-success"><?= $p['status'] ?></span>
                 </div>
-                <h6 class="fw-bold mb-1"><?= $p['name'] ?></h6>
+                <h6 class="fw-bold mb-1"><?= $p['proyecto_nombre'] ?></h6>
                 <p class="text-secondary small mb-0">
-                    <i class="bi bi-person me-1"></i><?= $p['client'] ?>
+                    <i class="bi bi-person me-1"></i><?= $p['cliente_nombre'] ?>
                 </p>
                 <p class="text-secondary small mb-3">
-                    <i class="bi bi-calendar3 me-1"></i>Started <?= $p['date'] ?>
+                    <i class="bi bi-calendar3 me-1"></i>Started <?= $p['fecha_inicio'] ?>
                 </p>
                 <hr class="my-2">
                 <div>
-                    <span class="fw-bold fs-5"><?= $p['samples'] ?></span>
+                    <span class="fw-bold fs-5"><?= $p['total_samples_por_proyecto'] ?></span>
                     <span class="text-secondary small ms-1">Total Samples</span>
                 </div>
             </div>
