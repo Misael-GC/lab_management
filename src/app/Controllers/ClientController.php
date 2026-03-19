@@ -19,7 +19,7 @@ class ClientController extends BaseController
                 COUNT(DISTINCT CASE WHEN p.status = 'Active' THEN p.id END) AS total_proyectos_activos,
                 COUNT(s.id)         AS total_samples_acumulados
             FROM client c
-            INNER JOIN project p ON c.id = p.id_client
+            left JOIN project p ON c.id = p.id_client
             LEFT JOIN  sample  s ON p.id = s.id_project
             GROUP BY c.id, c.name, c.email, c.phone, c.location
             ORDER BY c.name ASC
@@ -33,7 +33,27 @@ class ClientController extends BaseController
         ]);
     }
 
-    public function show(){
-        //
+    public function create(){
+        $this->render('clients/create', [
+            'title' => 'New Client'
+        ]);
     }
+
+    public function store(){
+        $name = $_POST['name'] ?? '';
+        $email = $_POST['email'] ?? '';
+        $phone = $_POST['phone'] ?? '';
+        $location = $_POST['location'] ?? '';
+
+        $db = Database::getInstance();
+        $stmt = $db->prepare("INSERT INTO client (name, email, phone, location) VALUES (?, ?, ?, ?)");
+        
+        if ($stmt->execute([$name, $email, $phone, $location])) {
+            header('Location: /clients');
+            exit;
+        } else {
+            echo "Error creating client.";
+        }
+    }
+
 }

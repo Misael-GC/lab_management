@@ -3,9 +3,9 @@
         <h4 class="fw-bold mb-0">Clients</h4>
         <p class="text-secondary small mb-0">Manage client organizations</p>
     </div>
-    <button class="btn btn-primary btn-sm px-3">
+    <a href="/clients/create" class="btn btn-primary btn-sm px-3">
         <i class="bi bi-plus-lg me-1"></i> New Client
-    </button>
+    </a>
 </div>
 
 <div class="card border-0 shadow-sm">
