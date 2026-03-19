@@ -30,7 +30,7 @@ class SampleController extends BaseController
             return $s;
         }, $samples);
 
-        $this->render('samples/index', [   // ← plural, coincide con la carpeta
+        $this->render('samples/index', [
             'title' => 'Samples',
             'samples' => $samples
         ]);

@@ -13,7 +13,7 @@
             <div class="card-body d-flex justify-content-between align-items-start">
                 <div>
                     <p class="text-secondary small mb-1">Total Samples</p>
-                    <h3 class="fw-bold mb-0">1,247</h3>
+                    <h3 class="fw-bold mb-0"><?= number_format($stats['total_samples']) ?></h3>
                 </div>
                 <div class="bg-primary bg-opacity-10 rounded-2 p-2">
                     <i class="bi bi-eyedropper text-primary fs-5"></i>
@@ -26,7 +26,7 @@
             <div class="card-body d-flex justify-content-between align-items-start">
                 <div>
                     <p class="text-secondary small mb-1">Urgent Samples</p>
-                    <h3 class="fw-bold mb-0">23</h3>
+                    <h3 class="fw-bold mb-0"><?= $stats['urgent_samples'] ?></h3>
                 </div>
                 <div class="bg-danger bg-opacity-10 rounded-2 p-2">
                     <i class="bi bi-exclamation-circle text-danger fs-5"></i>
@@ -39,7 +39,7 @@
             <div class="card-body d-flex justify-content-between align-items-start">
                 <div>
                     <p class="text-secondary small mb-1">Pending Analysis</p>
-                    <h3 class="fw-bold mb-0">156</h3>
+                    <h3 class="fw-bold mb-0"><?= $stats['pending_analysis'] ?></h3>
                 </div>
                 <div class="bg-warning bg-opacity-10 rounded-2 p-2">
                     <i class="bi bi-clock text-warning fs-5"></i>
@@ -52,7 +52,7 @@
             <div class="card-body d-flex justify-content-between align-items-start">
                 <div>
                     <p class="text-secondary small mb-1">Completion Rate</p>
-                    <h3 class="fw-bold mb-0">87%</h3>
+                    <h3 class="fw-bold mb-0"><?= $stats['completion_rate'] ?>%</h3>
                 </div>
                 <div class="bg-success bg-opacity-10 rounded-2 p-2">
                     <i class="bi bi-graph-up-arrow text-success fs-5"></i>
@@ -70,13 +70,6 @@
                 <i class="bi bi-activity me-2 text-primary"></i>Recent Activity
             </div>
             <div class="card-body p-0">
-                <?php
-                $activities = [
-                    ['user' => 'John Smith',   'action' => 'updated Sample #502',  'time' => '5 min ago'],
-                    ['user' => 'Sarah Chen',   'action' => 'completed Sample #498','time' => '12 min ago'],
-                    ['user' => 'Mike Johnson', 'action' => 'created Sample #503',  'time' => '28 min ago'],
-                ];
-                ?>
                 <?php foreach ($activities as $a): ?>
                 <div class="d-flex align-items-center gap-3 px-3 py-3 border-bottom">
                     <div class="rounded-circle bg-primary bg-opacity-10 d-flex align-items-center justify-content-center flex-shrink-0"
@@ -84,8 +77,8 @@
                         <i class="bi bi-person text-primary" style="font-size:.85rem"></i>
                     </div>
                     <div>
-                        <div class="small"><strong><?= $a['user'] ?></strong> <?= $a['action'] ?></div>
-                        <div class="text-secondary" style="font-size:.75rem"><?= $a['time'] ?></div>
+                        <div class="small"><strong><?= $a['user_name'] ?> <div> <?= $a['action'] ?> </div> </strong> <?= $a['sample_code'] ?></div>
+                        <div class="text-secondary" style="font-size:.75rem"><?= $a['created_at'] ?></div>
                     </div>
                 </div>
                 <?php endforeach ?>
@@ -108,24 +101,14 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <?php foreach ($recentSamples as $rs): ?>
                         <tr>
-                            <td class="ps-3 text-secondary">#503</td>
-                            <td>SMP-2024-503</td>
-                            <td>BioTech Corp</td>
-                            <td><span class="badge text-bg-warning">Pending</span></td>
+                            <td class="ps-3 text-secondary">#<?= $rs['id'] ?></td>
+                            <td><?= $rs['code'] ?></td>
+                            <td><?= $rs['client_name'] ?></td>
+                            <td><span class="badge <?= $rs['status_class'] ?>"><?= $rs['status'] ?></span></td>
                         </tr>
-                        <tr>
-                            <td class="ps-3 text-secondary">#502</td>
-                            <td>SMP-2024-502</td>
-                            <td>MedLab Inc</td>
-                            <td><span class="badge text-bg-primary">In Progress</span></td>
-                        </tr>
-                        <tr>
-                            <td class="ps-3 text-secondary">#501</td>
-                            <td>SMP-2024-501</td>
-                            <td>PharmaCo</td>
-                            <td><span class="badge text-bg-danger">Urgent</span></td>
-                        </tr>
+                        <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>
