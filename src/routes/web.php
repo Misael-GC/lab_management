@@ -22,6 +22,9 @@ $router->post('/clients/store', ClientController::class, 'store');
 
 
 $router->get('/projects', ProjectController::class, 'index');
+$router->get('/projects/create', ProjectController::class, 'create');
+$router->post('/projects/store', ProjectController::class, 'store');
+
+
 $router->get('/samples', SampleController::class, 'index');
 $router->get('/users', UserController::class, 'index');
-

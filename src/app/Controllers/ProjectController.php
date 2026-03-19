@@ -37,4 +37,31 @@ class ProjectController extends BaseController
             'projects' => $projects
         ]);
     }
+
+    public function create(): void
+    {
+        $db = Database::getInstance();
+        $clients = $db->query("SELECT id, name FROM client ORDER BY name ASC")->fetchAll();
+
+        $this->render('projects/create', [
+            'title' => 'New Project',
+            'clients' => $clients
+        ]);
+    }
+
+    public function store(): void
+    {
+        $name = $_POST['name'] ?? '';
+        $id_client = $_POST['id_client'] ?? '';
+        $started_at = $_POST['started_at'] ?? date('Y-m-d H:i:s');
+        $status = $_POST['status'] ?? 'Active';
+
+        $db = Database::getInstance();
+        $stmt = $db->prepare("INSERT INTO project (name, id_client, started_at, status) VALUES (?, ?, ?, ?)");
+
+        if ($stmt->execute([$name, $id_client, $started_at, $status])) {
+            header('Location: /projects');
+            exit;
+        }
+    }
 }
