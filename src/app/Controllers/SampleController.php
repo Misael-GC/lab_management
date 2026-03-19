@@ -164,4 +164,54 @@ class SampleController extends BaseController
         header('Location: /samples');
     }
 
+    public function exportExcel(): void
+    {
+        $db = Database::getInstance();
+        $samples = $db->query("
+            SELECT s.id, s.code, c.name as client, p.name as project, s.created_at, s.status 
+            FROM sample s 
+            JOIN project p ON s.id_project = p.id 
+            JOIN client c ON p.id_client = c.id
+        ")->fetchAll();
+
+        $filename = "samples_report_" . date('Ymd') . ".csv";
+        
+        // Headers para forzar descarga segura
+        header("Content-Type: text/csv; charset=utf-8");
+        header("Content-Disposition: attachment; filename=$filename");
+
+        $output = fopen("php://output", "w");
+        // Bom para que Excel reconozca caracteres especiales (UTF-8)
+        fputs($output, $bom =( chr(0xEF) . chr(0xBB) . chr(0xBF) ));
+        
+        // Cabeceras de columna
+        fputcsv($output, ['ID', 'Code', 'Client', 'Project', 'Received Date', 'Status']);
+
+        foreach ($samples as $row) {
+            fputcsv($output, [
+                $row['id'], $row['code'], $row['client'], 
+                $row['project'], $row['created_at'], $row['status']
+            ]);
+        }
+        fclose($output);
+        exit;
+    }
+
+    public function exportPdf(): void
+    {
+        $db = Database::getInstance();
+        $samples = $db->query("
+            SELECT s.id, s.code, c.name as client, p.name as project, s.created_at, s.status 
+            FROM sample s 
+            JOIN project p ON s.id_project = p.id 
+            JOIN client c ON p.id_client = c.id
+        ")->fetchAll();
+
+        // Renderizamos una vista minimalista preparada para impresión
+        $this->render('samples/export_pdf', [
+            'samples' => $samples,
+            'is_print' => true
+        ]);
+    }
+
 }

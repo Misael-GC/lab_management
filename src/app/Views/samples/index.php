@@ -32,12 +32,12 @@
                 <input type="date" class="form-control form-control-sm">
             </div>
             <div class="col-md-3 d-flex gap-2">
-                <button class="btn btn-success btn-sm flex-grow-1">
+                <a href="/samples/export/excel" class="btn btn-success btn-sm flex-grow-1">
                     <i class="bi bi-file-earmark-excel me-1"></i> Excel
-                </button>
-                <button class="btn btn-danger btn-sm flex-grow-1">
+                </a>
+                <a href="/samples/export/pdf" class="btn btn-danger btn-sm flex-grow-1">
                     <i class="bi bi-file-earmark-pdf me-1"></i> PDF
-                </button>
+                </a>
             </div>
         </div>
     </div>

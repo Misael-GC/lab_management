@@ -33,6 +33,8 @@ $router->get('/samples/show', SampleController::class, 'show');
 $router->get('/samples/edit', SampleController::class, 'edit');
 $router->post('/samples/update', SampleController::class, 'update');
 $router->get('/samples/delete', SampleController::class, 'delete');
+$router->get('/samples/export/excel', SampleController::class, 'exportExcel');
+$router->get('/samples/export/pdf', SampleController::class, 'exportPdf');
 
 
 $router->get('/users', UserController::class, 'index');
