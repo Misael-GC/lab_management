@@ -4,37 +4,58 @@ use Core\Database;
 
 class SampleController extends BaseController
 {
-    public function index(array $params = []): void
-    {
-        $db = Database::getInstance();
-        $stmt = $db->prepare("
-        SELECT 
-            s.id AS sample_id,
-            s.code AS sample_code,
-            s.status AS sample_status,
-            s.created_at AS received_date,
-            p.name AS proyecto_nombre,
-            c.name AS cliente_nombre
-        FROM 
-            sample s
-        INNER JOIN 
-            project p ON s.id_project = p.id
-        INNER JOIN 
-            client c ON p.id_client = c.id;
-        ");
-        $stmt->execute();
-        $samples = $stmt->fetchAll();
+    public function index(): void
+{
+    $db = Database::getInstance();
+    
+    // Captura de filtros desde la URL
+    $status = $_GET['status'] ?? '';
+    $dateFrom = $_GET['date_from'] ?? '';
+    $dateTo = $_GET['date_to'] ?? '';
 
-        $samples = array_map(function($s) {
-            $s['status_class'] = $this->getStatusBadgeClass($s['sample_status']);
-            return $s;
-        }, $samples);
+    // Query Base
+    $sql = "SELECT s.id AS sample_id, s.code AS sample_code, s.status AS sample_status, 
+                   s.created_at AS received_date, p.name AS proyecto_nombre, c.name AS cliente_nombre 
+            FROM sample s 
+            INNER JOIN project p ON s.id_project = p.id 
+            INNER JOIN client c ON p.id_client = c.id 
+            WHERE 1=1"; // Facilita la concatenación de ANDs
 
-        $this->render('samples/index', [
-            'title' => 'Samples',
-            'samples' => $samples
-        ]);
+    $bindParams = [];
+
+    // Filtro de Estatus
+    if ($status !== '') {
+        $sql .= " AND s.status = ?";
+        $bindParams[] = $status;
     }
+
+    // Filtro por rango de fechas (Considerando que created_at es DATETIME)
+    if ($dateFrom !== '') {
+        $sql .= " AND s.created_at >= ?";
+        $bindParams[] = $dateFrom . " 00:00:00";
+    }
+    if ($dateTo !== '') {
+        $sql .= " AND s.created_at <= ?";
+        $bindParams[] = $dateTo . " 23:59:59";
+    }
+
+    $sql .= " ORDER BY s.id DESC";
+
+    $stmt = $db->prepare($sql);
+    $stmt->execute($bindParams);
+    $samples = $stmt->fetchAll();
+
+    // Mapeo de estilos para los badges
+    $samples = array_map(function($s) {
+        $s['status_class'] = $this->getStatusBadgeClass($s['sample_status']);
+        return $s;
+    }, $samples);
+
+    $this->render('samples/index', [
+        'title' => 'Samples',
+        'samples' => $samples
+    ]);
+}
 
     private function getStatusBadgeClass(string $status): string {
         return match ($status) {
