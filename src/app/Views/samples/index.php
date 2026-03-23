@@ -36,7 +36,7 @@
                 
                 <div class="col-md-5 d-flex gap-2">
                     <button type="submit" class="btn btn-primary btn-sm flex-grow-1">
-                        <i class="bi bi-filter me-1"></i> Filter
+                        <i class="bi bi-filter me-1"></i> Filtrar
                     </button>
 
                     <button type="submit" formaction="/samples/export/excel" class="btn btn-success btn-sm flex-grow-1">
@@ -57,7 +57,7 @@
 
 <!-- Table -->
 <div class="card border-0 shadow-sm">
-    <div class="card-body p-0">
+    <div class="card-body p-0 table-responsive">
         <table class="table table-hover mb-0" id="datatablesSimple">
             <thead class="table-light">
                 <tr>
