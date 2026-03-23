@@ -71,16 +71,16 @@ class SampleController extends BaseController
     public function create(): void
     {
         $db = Database::getInstance();
-        // Obtenemos proyectos con el nombre del cliente para que el usuario sepa de quién es el proyecto
-        $projects = $db->query("
-            SELECT p.id, p.name as project_name, c.name as client_name 
-            FROM project p 
-            JOIN client c ON p.id_client = c.id 
-            ORDER BY c.name ASC
-        ")->fetchAll();
+        
+        // Obtenemos todos los clientes
+        $clients = $db->query("SELECT id, name FROM client ORDER BY name ASC")->fetchAll();
+        
+        // Obtenemos todos los proyectos para tenerlos listos en el frontend
+        $projects = $db->query("SELECT id, name, id_client FROM project ORDER BY name ASC")->fetchAll();
 
         $this->render('samples/create', [
             'title' => 'New Sample',
+            'clients' => $clients,
             'projects' => $projects
         ]);
     }
