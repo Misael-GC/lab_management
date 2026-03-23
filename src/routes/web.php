@@ -9,6 +9,7 @@ use App\Controllers\UserController;
 
 
 
+
 // -- Páginas generales --
 $router->get('/', HomeController::class, 'index');
 
