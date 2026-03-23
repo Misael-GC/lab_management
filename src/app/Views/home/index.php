@@ -6,7 +6,35 @@
     </div>
 </div>
 
+
+
 <!-- Stat cards -->
+
+<form action="/" method="GET" class="row g-3 mb-4 align-items-end">
+    <!-- <div class="col-md-4">
+        <label class="form-label small fw-bold">Filter by Client</label>
+        <select name="client_id" class="form-select form-select-sm" onchange="this.form.submit()">
+            <option value="">All Clients</option>
+            <?php foreach($clients as $c): ?>
+                <option value="<?= $c['id'] ?>" <?= $filters['client_id'] == $c['id'] ? 'selected' : '' ?>><?= $c['name'] ?></option>
+            <?php endforeach; ?>
+        </select>
+    </div> -->
+    <div class="col-md-4">
+        <label class="form-label small fw-bold">Filter by Project</label>
+        <select name="project_id" class="form-select form-select-sm" onchange="this.form.submit()">
+            <option value="">All Projects</option>
+            <?php foreach($projects as $p): ?>
+                <option value="<?= $p['id'] ?>" <?= $filters['project_id'] == $p['id'] ? 'selected' : '' ?>><?= $p['name'] ?></option>
+            <?php endforeach; ?>
+        </select>
+    </div>
+    <div class="col-md-2">
+        <a href="/" class="btn btn-outline-secondary btn-sm w-100">Clear</a>
+    </div>
+</form>
+
+
 <div class="row g-3 mb-4">
     <div class="col-md-3">
         <div class="card border-0 shadow-sm h-100" style="border-left: 4px solid #0d6efd !important;">
@@ -56,6 +84,19 @@
                 </div>
                 <div class="bg-success bg-opacity-10 rounded-2 p-2">
                     <i class="bi bi-graph-up-arrow text-success fs-5"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card border-0 shadow-sm" style="border-left: 4px solid #6f42c1 !important;">
+            <div class="card-body d-flex justify-content-between align-items-center">
+                <div>
+                    <p class="text-secondary small mb-1">Valor Total del Proyecto / Selección</p>
+                    <h2 class="fw-bold mb-0 text-dark">$ <?= number_format($stats['project_value'] ?? 0, 2) ?></h2>
+                </div>
+                <div class="bg-purple bg-opacity-10 rounded-2 p-3" style="background-color: rgba(111, 66, 193, 0.1);">
+                    <i class="bi bi-currency-dollar text-purple fs-3" style="color: #6f42c1;"></i>
                 </div>
             </div>
         </div>
