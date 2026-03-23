@@ -23,11 +23,25 @@
                         
                         <div class="col-md-6">
                             <label class="form-label small fw-medium">Initial Status</label>
-                            <select name="status" class="form-select form-select-sm">
+                            <select name="status" class="form-select form-select-sm" required>
                                 <option value="Pending">Pending</option>
                                 <option value="Urgent">Urgent</option>
                                 <option value="In Progress">In Progress</option>
                             </select>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label small fw-medium">Analysis Cost (MXN)</label>
+                            <div class="input-group input-group-sm">
+                                <span class="input-group-text bg-light border-end-0"><i class="bi bi-currency-dollar"></i></span>
+                                <input type="number" 
+                                    name="analysis_cost" 
+                                    class="form-control form-control-sm border-start-0" 
+                                    step="0.01" 
+                                    min="0" 
+                                    placeholder="0.00" 
+                                    required>
+                            </div>
                         </div>
 
                         <div class="col-md-12">
@@ -44,7 +58,7 @@
 
                         <div class="col-md-12 mt-4 text-end">
                             <button type="submit" class="btn btn-primary btn-sm px-4">
-                                <i class="bi bi-save me-1"></i> Register Specimen
+                                <i class="bi bi-save me-1"></i> Register
                             </button>
                         </div>
                     </div>

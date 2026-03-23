@@ -92,14 +92,16 @@ class SampleController extends BaseController
         $code = $_POST['code'] ?? '';
         $status = $_POST['status'] ?? 'Pending';
         $id_project = $_POST['id_project'] ?? null;
+        $analysis_cost = $_POST['analysis_cost'] ?? 0.00;
         $id_user = 1; // Por ahora estático hasta que implementes Login
+
 
         try {
             $db->beginTransaction();
 
             // 1. Insertar el Sample
-            $stmt = $db->prepare("INSERT INTO sample (code, status, id_project, id_user) VALUES (?, ?, ?, ?)");
-            $stmt->execute([$code, $status, $id_project, $id_user]);
+            $stmt = $db->prepare("INSERT INTO sample (code, status, id_project, id_user, analysis_cost) VALUES (?, ?, ?, ?, ?)");
+            $stmt->execute([$code, $status, $id_project, $id_user, $analysis_cost]);
             $sampleId = $db->lastInsertId();
 
             // 2. Registrar en el Historial (Actividad Reciente)
