@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css">
-    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         /* Estabilizadores para evitar saltos de línea */
         body { padding-top: 56px; } /* Espacio para la topbar fija */
@@ -31,10 +31,10 @@
     <i class="bi bi-list fs-4"></i>
 </button>
 
-        <div class="position-relative d-none d-md-block" style="width: 300px;">
+        <!-- <div class="position-relative d-none d-md-block" style="width: 300px;">
             <i class="bi bi-search position-absolute text-secondary" style="left:10px; top:50%; transform:translateY(-50%); font-size:.85rem"></i>
             <input type="text" class="form-control form-control-sm bg-light border-light ps-4" placeholder="Buscar...">
-        </div>
+        </div> -->
 
         <div class="d-flex align-items-center gap-3">
             <button class="btn btn-light btn-sm border-0 position-relative">
@@ -97,6 +97,7 @@
         <?= $content ?>
     </div>
 </main>
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>

@@ -39,3 +39,6 @@ $router->get('/samples/export/pdf', SampleController::class, 'exportPdf');
 
 
 $router->get('/users', UserController::class, 'index');
+$router->post('/users/update-profile', UserController::class, 'updateProfile');
+$router->post('/users/change-password', UserController::class, 'changePassword');
+

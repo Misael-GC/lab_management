@@ -16,25 +16,27 @@
                 </div>
             </div>
             <div class="card-body">
-                <div class="mb-3">
-                    <label class="form-label small fw-medium">Full Name</label>
-                    <input type="text" class="form-control" value="Admin User">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label small fw-medium">Email</label>
-                    <input type="email" class="form-control" value="admin@limscore.com">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label small fw-medium">Role</label>
-                    <input type="text" class="form-control bg-light" value="ADMIN" readonly>
-                </div>
-                <button class="btn btn-primary btn-sm px-4">Save Changes</button>
+                <form action="/users/update-profile" method="POST">
+                    <div class="mb-3">
+                        <label class="form-label small fw-medium">Full Name</label>
+                        <input type="text" name="name" class="form-control" value="<?= htmlspecialchars($user['name'] ?? '') ?>" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small fw-medium">Email</label>
+                        <input type="email" name="email" class="form-control" value="<?= htmlspecialchars($user['email'] ?? '') ?>" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small fw-medium">Role</label>
+                        <input type="text" class="form-control bg-light text-uppercase" value="<?= $user['rol'] ?? 'viewer' ?>" readonly disabled>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-sm px-4">Save Changes</button>
+                </form>
             </div>
         </div>
     </div>
 
     <!-- Notifications -->
-    <div class="col-md-6">
+    <!-- <div class="col-md-6">
         <div class="card border-0 shadow-sm h-100">
             <div class="card-header bg-white border-bottom py-3">
                 <div class="d-flex align-items-center gap-2">
@@ -63,11 +65,11 @@
                 <?php endforeach ?>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <!-- Security -->
-    <div class="row g-3 mt-1">
-        <div class="col-md-6">
+    <div class="col-md-6">
+        <div class="">
             <div class="card border-0 shadow-sm h-100">
                 <div class="card-header bg-white border-bottom py-3">
                     <div class="d-flex align-items-center gap-2">
@@ -79,21 +81,21 @@
                 </div>
                 <div class="card-body">
                     <div class="d-grid gap-2">
-                        <button class="btn btn-outline-secondary btn-sm text-start py-2">
+                        <button class="btn btn-outline-secondary btn-sm text-start py-2" data-bs-toggle="modal" data-bs-target="#changePasswordModal">
                             <span class="ms-2">Change Password</span>
                         </button>
-                        <button class="btn btn-outline-secondary btn-sm text-start py-2">
+                        <!-- <button class="btn btn-outline-secondary btn-sm text-start py-2">
                             <span class="ms-2">Two-Factor Authentication</span>
                         </button>
                         <button class="btn btn-outline-secondary btn-sm text-start py-2">
                             <span class="ms-2">View Login History</span>
-                        </button>
+                        </button> -->
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- Data Management -->
+    </div>
+    <!-- Data Management -->
         <div class="col-md-6">
             <div class="card border-0 shadow-sm h-100">
                 <div class="card-header bg-white border-bottom py-3">
@@ -119,5 +121,51 @@
                 </div>
             </div>
         </div>
+</div>
+
+<div class="modal fade" id="changePasswordModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow">
+            <div class="modal-header border-bottom py-3">
+                <h6 class="modal-title fw-bold">Change Password</h6>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="/users/change-password" method="POST">
+                <div class="modal-body p-4">
+                    <div class="mb-3">
+                        <label class="form-label small fw-medium">Current Password</label>
+                        <input type="password" name="current_password" class="form-control" required>
+                    </div>
+                    <hr class="text-secondary opacity-25">
+                    <div class="mb-3">
+                        <label class="form-label small fw-medium">New Password</label>
+                        <input type="password" name="new_password" class="form-control" required minlength="8">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small fw-medium">Confirm New Password</label>
+                        <input type="password" name="confirm_password" class="form-control" required>
+                    </div>
+                </div>
+                <div class="modal-footer border-0 p-4 pt-0">
+                    <button type="button" class="btn btn-light btn-sm" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary btn-sm px-4">Update Password</button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
+
+<?php if (isset($_GET['status']) && $_GET['status'] === 'updated'): ?>
+<script>
+    Swal.fire({
+        icon: 'success',
+        title: 'Profile Updated',
+        text: 'Your changes have been saved successfully.',
+        timer: 3000,
+        showConfirmButton: false
+    });
+</script>
+<?php endif; ?>
+
+
+<script src="/assets/js/alerts-user.js"></script>
