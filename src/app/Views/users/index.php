@@ -108,13 +108,13 @@
                 </div>
                 <div class="card-body">
                     <div class="d-grid gap-2">
-                        <button class="btn btn-outline-secondary btn-sm text-center py-2">
-                            Export All Data
-                        </button>
-                        <button class="btn btn-outline-secondary btn-sm text-center py-2">
+                        <a href="/users/export-all" class="btn btn-outline-secondary btn-sm text-center py-2">
+                            Export All Data (CSV/Excel)
+                        </a>
+                        <button class="btn btn-outline-secondary btn-sm text-center py-2" data-bs-toggle="modal" data-bs-target="#importModal">
                             Import Data
                         </button>
-                        <button class="btn btn-outline-danger btn-sm text-center py-2 fw-semibold">
+                        <button class="btn btn-outline-danger btn-sm text-center py-2 fw-semibold" onclick="confirmClearData()">
                             Clear All Samples
                         </button>
                     </div>
@@ -155,6 +155,27 @@
     </div>
 </div>
 
+<!-- FORM DATA -->
+<div class="modal fade" id="importModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow">
+            <div class="modal-header border-bottom py-3">
+                <h6 class="modal-title fw-bold">Import Samples from CSV</h6>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form action="/users/import-all" method="POST" enctype="multipart/form-data">
+                <div class="modal-body p-4">
+                    <p class="small text-secondary mb-3">Please upload a CSV file with the correct format (Code, Status, ProjectID, UserID, Cost).</p>
+                    <input type="file" name="excel_file" class="form-control form-control-sm" accept=".csv" required>
+                </div>
+                <div class="modal-footer border-0 p-4 pt-0">
+                    <button type="submit" class="btn btn-success btn-sm w-100">Start Import</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 <?php if (isset($_GET['status']) && $_GET['status'] === 'updated'): ?>
 <script>
     Swal.fire({
@@ -169,3 +190,4 @@
 
 
 <script src="/assets/js/alerts-user.js"></script>
+<script src="/assets/js/alerts-data-management.js"></script>

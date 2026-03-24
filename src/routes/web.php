@@ -42,3 +42,6 @@ $router->get('/users', UserController::class, 'index');
 $router->post('/users/update-profile', UserController::class, 'updateProfile');
 $router->post('/users/change-password', UserController::class, 'changePassword');
 
+$router->get('/users/export-all', UserController::class, 'exportAllSamples');
+$router->post('/users/import-all', UserController::class, 'importSamples');
+$router->post('/users/clear-samples', UserController::class, 'clearAllSamples');
